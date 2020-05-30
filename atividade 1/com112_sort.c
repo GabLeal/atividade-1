@@ -10,9 +10,11 @@ void bubbleSort(int *vector, int len, int *moves, int *comparies){
 
     int position_compare = len-1;
     int aux = 0;
+    int x;
+    int y;
 
-    for (int x = 0; x < position_compare; x++){
-        for (int y = 0; y < position_compare; y++){
+    for (x = 0; x < position_compare; x++){
+        for (y = 0; y < position_compare; y++){
             *comparies += 1;
 
             if (vector[y] > vector[y+1]){
@@ -34,11 +36,13 @@ void selectionSort(int *vector, int len, int *moves, int *comparies){
 
     int position_compare = len-1;
     int aux = 0;
+    int i;
+    int j;
 
-    for(int i = 0; i < len-1; i++){       
+    for(i = 0; i < len-1; i++){       
       int position_bigger = 0;
        
-       for(int j = 0; j < position_compare; j++){
+       for(j = 0; j < position_compare; j++){
             *comparies +=1;
             if (vector[position_bigger] < vector[j+1]){
                 position_bigger = j+1;
@@ -62,10 +66,12 @@ void insertionSort(int *vector, int len, int *moves, int *comparies){
 
     int position_compare = len-1;
     int aux = 0;
+    int j;
+    int k;
 
-    for(int j = 1; j <= position_compare; j++ ){  
+    for(j = 1; j <= position_compare; j++ ){  
 
-        for(int k = j; k > 0; k--){
+        for(k = j; k > 0; k--){
             *comparies +=1;
             if (vector[k] < vector[k-1]){
                 aux = vector[k];
