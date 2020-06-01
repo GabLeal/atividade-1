@@ -76,9 +76,11 @@ char menu(){
 */
 int main(){
     char choice;
-    int len;
+    int len, j, i;
     int originVector[10000];
     int sortVector[10000];
+    int incVector[10000];
+    int decVector[10000];
 
     int flag;
     int moves;
@@ -86,6 +88,14 @@ int main(){
     double time;
     clock_t Ticks[2];
 
+    for(i = 0, j = 9999; i < 10000; i++, j--){
+		incVector[i] = i;
+		decVector[i] = j;
+	}
+    
+    input(incVector, len, 2);
+    input(decVector, len, 3);
+    
     do{
         comparies = 0;
         moves = 0;
@@ -96,7 +106,7 @@ int main(){
         case '0':
             flag = 0;
             len = numberRandom(originVector);
-            input(originVector, len);
+            input(originVector, len, 1);
 
             printf("\n");
             break;
@@ -115,7 +125,7 @@ int main(){
             printfVector(sortVector,len);
             
             if(!flag){
-                output(sortVector,len);
+                output(sortVector,len, 1);
                 flag = 1;
             }
 
@@ -138,7 +148,7 @@ int main(){
             printfVector(sortVector,len);
             
             if(!flag){
-                output(sortVector,len);
+                output(sortVector,len, 1);
                 flag = 1;
             }
             
@@ -161,7 +171,7 @@ int main(){
             printfVector(sortVector,len);
 
             if(!flag){
-                output(sortVector,len);
+                output(sortVector,len, 1);
                 flag = 1;
             }
 
@@ -184,7 +194,7 @@ int main(){
             printfVector(sortVector,len);
 
             if(!flag){
-                output(sortVector,len);
+                output(sortVector,len, 1);
                 flag = 1;
             }
 
@@ -208,7 +218,7 @@ int main(){
             printfVector(sortVector,len);
 
             if(!flag){
-                output(sortVector,len);
+                output(sortVector,len, 1);
                 flag = 1;
             }
 
@@ -225,10 +235,10 @@ int main(){
             bubbleSort(sortVector,len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
-            reportFile("Metodo Bubble Sort\n",len, moves, comparies, time);
+            reportFile("Metodo Bubble Sort\n",len, moves, comparies, time, 1);
 
             if(!flag){
-                output(sortVector,len);
+                output(sortVector,len, 1);
                 flag = 1;
             }
 
@@ -239,7 +249,7 @@ int main(){
             insertionSort(sortVector,len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
-            reportFile("Metodo Insertion Sort\n",len, moves, comparies, time);
+            reportFile("Metodo Insertion Sort\n",len, moves, comparies, time, 1);
 
             copyVector(originVector, sortVector, len);
             moves = 0;
@@ -248,7 +258,7 @@ int main(){
             selectionSort(sortVector, len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
-            reportFile("Metodo Selection Sort\n",len, moves, comparies, time);
+            reportFile("Metodo Selection Sort\n",len, moves, comparies, time, 1);
 
             copyVector(originVector, sortVector, len);
             moves = 0;
@@ -257,7 +267,7 @@ int main(){
             mergeSort(sortVector ,0 , len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
-            reportFile("Metodo Merge Sort\n",len, moves, comparies, time);
+            reportFile("Metodo Merge Sort\n",len, moves, comparies, time, 1);
 
             copyVector(originVector, sortVector, len);
             moves = 0; 
@@ -266,7 +276,7 @@ int main(){
             quickSort(sortVector, 0, len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
-            reportFile("Metodo Quick Sort\n",len, moves, comparies, time);
+            reportFile("Metodo Quick Sort\n",len, moves, comparies, time, 1);
 
             printf("Consulte o arquivo com112_relatorio para ver as estatisticas\n\n");
 
