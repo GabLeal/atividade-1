@@ -9,7 +9,7 @@
 * PROTOTYPES
 */
 char menu();
-int numberRandom(int *vector);
+int numberRandom(int *vector,int *incVector, int *decVector);
 void copyVector(int *vector1, int *vector2, int len);
 void printfVector(int *vector, int len);
 
@@ -33,8 +33,8 @@ void copyVector(int *vector1, int *vector2, int len){
 }
 
 
-int numberRandom(int *vector){
-    int len;
+int numberRandom(int *vector, int *incVector, int *decVector){
+    int len, j, i;;
 
     printf("quantidade de numeros a serem gerados e ordenados: ");
     scanf("%d", &len);
@@ -44,9 +44,13 @@ int numberRandom(int *vector){
 
     }
     
-    for (int i = 0; i < len; i++){
-        printf("%d ",vector[i]);
-    }
+    for(i = 0, j = len; i < len; i++, j--){
+		incVector[i] = i;
+		decVector[i] = j;
+	}
+    
+    input(incVector, len, 2);
+    input(decVector, len, 3);
 
     return len;
 }
@@ -76,7 +80,7 @@ char menu(){
 */
 int main(){
     char choice;
-    int len, j, i;
+    int len;
     int originVector[10000];
     int sortVector[10000];
     int incVector[10000];
@@ -87,14 +91,6 @@ int main(){
     int comparies;
     double time;
     clock_t Ticks[2];
-
-    for(i = 0, j = 9999; i < 10000; i++, j--){
-		incVector[i] = i;
-		decVector[i] = j;
-	}
-    
-    input(incVector, len, 2);
-    input(decVector, len, 3);
     
     do{
         comparies = 0;
@@ -105,7 +101,7 @@ int main(){
         switch (choice){
         case '0':
             flag = 0;
-            len = numberRandom(originVector);
+            len = numberRandom(originVector, incVector,decVector);
             input(originVector, len, 1);
 
             printf("\n");
@@ -113,22 +109,20 @@ int main(){
 
         case '1':
             copyVector(originVector, sortVector, len);
-            printf("Vetor gerado: ");
-            printfVector(sortVector,len);
 
             Ticks[0] = clock();
             bubbleSort(sortVector,len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
 
-            printf("Vetor ordenado com buubleSort: ");
-            printfVector(sortVector,len);
+            printf("Vetor ordenado com buubleSort\n");
             
             if(!flag){
                 output(sortVector,len, 1);
                 flag = 1;
             }
-
+            
+            printf("Numeros de elementos: %d\n", len);
             printf("Comparações: %d\n", comparies);
             printf("Movimentações: %d\n", moves);
             printf("Tempo de execução: %f\n", time);
@@ -136,22 +130,19 @@ int main(){
 
         case '2':
             copyVector(originVector, sortVector, len);
-            printf("Vetor gerado: ");
-            printfVector(sortVector,len);
 
             Ticks[0] = clock();
             insertionSort(sortVector,len, &moves, &comparies);         
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
             
-            printf("Vetor ordenado com insertionSort: ");
-            printfVector(sortVector,len);
+            printf("Vetor ordenado com insertionSort\n");
             
             if(!flag){
                 output(sortVector,len, 1);
                 flag = 1;
             }
-            
+            printf("Numeros de elementos: %d\n", len);
             printf("Comparações: %d\n", comparies);
             printf("Movimentações: %d\n", moves);
             printf("Tempo de execução: %f\n", time);
@@ -159,22 +150,20 @@ int main(){
 
         case '3':
             copyVector(originVector, sortVector, len);
-            printf("Vetor gerado: ");
-            printfVector(sortVector,len);
 
             Ticks[0] = clock();        
             selectionSort(sortVector, len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
 
-            printf("Vetor ordenado com selectionSort: ");
-            printfVector(sortVector,len);
+            printf("Vetor ordenado com selectionSort\n");
 
             if(!flag){
                 output(sortVector,len, 1);
                 flag = 1;
             }
 
+            printf("Numeros de elementos: %d\n", len);
             printf("Comparações: %d\n", comparies);
             printf("Movimentações: %d\n", moves);
             printf("Tempo de execução: %f\n", time);
@@ -182,22 +171,20 @@ int main(){
 
         case '4':
             copyVector(originVector, sortVector, len);
-            printf("Vetor gerado: ");
-            printfVector(sortVector,len);
 
             Ticks[0] = clock();       
             mergeSort(sortVector ,0 , len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
 
-            printf("Vetor ordenado com mergeSort: ");
-            printfVector(sortVector,len);
+            printf("Vetor ordenado com mergeSort\n\n");
 
             if(!flag){
                 output(sortVector,len, 1);
                 flag = 1;
             }
 
+            printf("Numeros de elementos: %d\n", len);
             printf("comparações: %d\n", comparies);
             printf("Movimentações: %d\n", moves);
             printf("Tempo de execução: %f\n", time);
@@ -205,44 +192,63 @@ int main(){
 
         case '5':
             copyVector(originVector, sortVector, len);
-            printf("Vetor gerado: ");
-            printfVector(sortVector,len);
 
             Ticks[0] = clock();
             quickSort(sortVector, 0, len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
 
-
-            printf("Vetor ordenado com quickSort: ");
-            printfVector(sortVector,len);
-
             if(!flag){
                 output(sortVector,len, 1);
                 flag = 1;
             }
 
+            printf("Numeros de elementos: %d\n", len);
             printf("comparações: %d\n", comparies);
             printf("Movimentações: %d\n", moves);
             printf("Tempo de execução: %f\n", time);
             break;
 
         case '6':
+            printf("Processando relatorios...");
+
             copyVector(originVector, sortVector, len);
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            bubbleSort(sortVector, len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Bubble Sort\n",len, moves, comparies, time, 1);
+            
+            if(!flag){
+            	output(sortVector,len,1);
+            	flag = 1;
+			}
+			
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            bubbleSort(incVector,len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Bubble Sort\n",len, moves, comparies, time, 2);
+            
+   			output(incVector,len,2);
+            
+            copyVector(decVector, sortVector, len);
             moves = 0;
             comparies = 0;
             Ticks[0] = clock();
             bubbleSort(sortVector,len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
-            reportFile("Metodo Bubble Sort\n",len, moves, comparies, time, 1);
-
-            if(!flag){
-                output(sortVector,len, 1);
-                flag = 1;
-            }
-
-            copyVector(originVector, sortVector, len);
+            reportFile("Metodo Bubble Sort\n",len, moves, comparies, time, 3);
+  		  	  
+			output(sortVector,len,3);
+			
+			
+            copyVector(originVector, sortVector,len);
             moves = 0;
             comparies = 0;
             Ticks[0] = clock();
@@ -250,8 +256,26 @@ int main(){
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
             reportFile("Metodo Insertion Sort\n",len, moves, comparies, time, 1);
+            
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            insertionSort(incVector,len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Insertion Sort\n",len, moves, comparies, time, 2);
+            
+            copyVector(decVector, sortVector,len);
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            insertionSort(sortVector,len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Insertion Sort\n",len, moves, comparies, time, 3);
+            
 
-            copyVector(originVector, sortVector, len);
+            copyVector(originVector, sortVector,len);
             moves = 0;
             comparies = 0;
             Ticks[0] = clock();
@@ -259,17 +283,53 @@ int main(){
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
             reportFile("Metodo Selection Sort\n",len, moves, comparies, time, 1);
+            
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            selectionSort(incVector, len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Selection Sort\n",len, moves, comparies, time, 2);
+            
+            copyVector(decVector, sortVector,len);
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            selectionSort(sortVector, len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Selection Sort\n",len, moves, comparies, time, 3);
+            
 
             copyVector(originVector, sortVector, len);
             moves = 0;
             comparies = 0;
             Ticks[0] = clock();
-            mergeSort(sortVector ,0 , len, &moves, &comparies);
+            mergeSort(sortVector, 0, len, &moves, &comparies);
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
             reportFile("Metodo Merge Sort\n",len, moves, comparies, time, 1);
+            
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            mergeSort(incVector, 0, len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Merge Sort\n",len, moves, comparies, time, 2);
+            
+            copyVector(decVector, sortVector,len);
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            mergeSort(sortVector, 0, len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Merge Sort\n",len, moves, comparies, time, 3);
 
-            copyVector(originVector, sortVector, len);
+			
+            copyVector(originVector, sortVector,len);
             moves = 0; 
             comparies = 0;
             Ticks[0] = clock(); 
@@ -277,9 +337,25 @@ int main(){
             Ticks[1] = clock();
             time = (Ticks[1] - Ticks[0]) / 3600.0;
             reportFile("Metodo Quick Sort\n",len, moves, comparies, time, 1);
-
-            printf("Consulte o arquivo com112_relatorio para ver as estatisticas\n\n");
-
+            
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            quickSort(incVector, 0, len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Quick Sort\n",len, moves, comparies, time, 2);
+            
+            copyVector(decVector, sortVector,len);
+            moves = 0;
+            comparies = 0;
+            Ticks[0] = clock();
+            quickSort(sortVector, 0, len, &moves, &comparies);
+            Ticks[1] = clock();
+            time = (Ticks[1] - Ticks[0]) / 3600.0;
+            reportFile("Metodo Quick Sort\n",len, moves, comparies, time, 3);
+            
+            printf("Consulte os arquivos de relat�rio para ver as estat�sticas\n\n");
             break;
 
         case '7':

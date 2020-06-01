@@ -8,11 +8,11 @@ void output(int *vector, int len, int cod){
     int i;
 
     if(cod == 1){
-		arq = fopen("com112_entrada_aleatorio.txt", "w");
+		arq = fopen("com112_saida_aleatorio.txt", "w");
 	}else if(cod == 2){
-		arq = fopen("com112_entrada_crescente.txt", "w");
+		arq = fopen("com112_saida_crescente.txt", "w");
 	}else{
-		arq = fopen("com112_entrada_decrescente.txt", "w");
+		arq = fopen("com112_saida_decrescente.txt", "w");
 	}
     
     fprintf(arq,"%d\n", len);
@@ -29,11 +29,11 @@ void input(int *vector, int len, int cod){
     int i;
 
     if(cod == 1){
-		arq = fopen("com112_saida_aleatorio.txt", "w");
+		arq = fopen("com112_entrada_aleatorio.txt", "w");
 	}else if(cod == 2){
-		arq = fopen("com112_saida_crescente.txt", "w");
+		arq = fopen("com112_entrada_crescente.txt", "w");
 	}else{
-		arq = fopen("com112_saida_decrescente.txt", "w");
+		arq = fopen("com112_entrada_decrescente.txt", "w");
 	}
 
 
@@ -60,7 +60,7 @@ void reportFile(char *sort, int len, int moves, int comparies, double time, int 
     fprintf(arq,"Numero de elementos ordenados: %d\n", len);
 
     fprintf(arq, "%s", sort);
-    fprintf(arq,"Tempo: %.2f\n", time);
+    fprintf(arq,"Tempo: %f\n", time);
     fprintf(arq,"Comparações: %d\n", comparies);
     fprintf(arq,"Movimentações: %d\n\n", moves);
 
