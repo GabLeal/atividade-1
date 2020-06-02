@@ -17,7 +17,8 @@ void printfVector(int *vector, int len);
 * FUCTIONS
 */
 void printfVector(int *vector, int len){
-    for (int i = 0; i < len; i++){
+    int i;
+    for (i = 0; i < len; i++){
         printf("%d ", vector[i]);
     }
 
@@ -25,8 +26,8 @@ void printfVector(int *vector, int len){
 }
 
 void copyVector(int *vector1, int *vector2, int len){
-
-    for (int i = 0; i < len; i++){
+    int i;
+    for ( i = 0; i < len; i++){
         vector2[i] = vector1[i];
     }
     
@@ -39,12 +40,12 @@ int numberRandom(int *vector, int *incVector, int *decVector){
     printf("quantidade de numeros a serem gerados e ordenados: ");
     scanf("%d", &len);
 
-    for (int i = 0; i < len; i++){
-        vector[i] = rand() % 100;
+    for ( i = 0; i < len; i++){
+        vector[i] = rand() % 10000;
 
     }
     
-    for(i = 0, j = len; i < len; i++, j--){
+    for(i = 0, j = len - 1; i < len; i++, j--){
 		incVector[i] = i;
 		decVector[i] = j;
 	}
