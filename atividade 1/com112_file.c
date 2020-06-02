@@ -2,11 +2,18 @@
 #include <stdio.h>
 #include "com112_file.h"
 
-void output(int *vector, int len){
+void output(int *vector, int len, int cod){
 
     FILE *arq;
     int i;
-    arq = fopen("com112_saida.txt", "w");
+
+    if(cod == 1){
+		arq = fopen("com112_saida_aleatorio.txt", "w");
+	}else if(cod == 2){
+		arq = fopen("com112_saida_crescente.txt", "w");
+	}else{
+		arq = fopen("com112_saida_decrescente.txt", "w");
+	}
     
     fprintf(arq,"%d\n", len);
     for (i = 0; i < len; i++){
@@ -16,11 +23,18 @@ void output(int *vector, int len){
     fclose(arq);
 }
 
-void input(int *vector, int len){
+void input(int *vector, int len, int cod){
 
     FILE *arq;
     int i;
-    arq = fopen("com112_entrada.txt", "w");
+
+    if(cod == 1){
+		arq = fopen("com112_entrada_aleatorio.txt", "w");
+	}else if(cod == 2){
+		arq = fopen("com112_entrada_crescente.txt", "w");
+	}else{
+		arq = fopen("com112_entrada_decrescente.txt", "w");
+	}
 
 
     fprintf(arq,"%d\n", len);
@@ -31,15 +45,22 @@ void input(int *vector, int len){
     fclose(arq);
 } 
 
-void reportFile(char *sort, int len, int moves, int comparies, double time){
+void reportFile(char *sort, int len, int moves, int comparies, double time, int cod){
 
     FILE *arq;
-    arq = fopen("com112_relatorio.txt", "a");
+
+    if(cod == 1){
+		arq = fopen("com112_relatorio_aleatorio.txt", "a");
+	}else if(cod == 2){
+		arq = fopen("com112_relatorio_crescente.txt", "a");
+	}else{
+		arq = fopen("com112_relatorio_decrescente.txt", "a");
+	}
 
     fprintf(arq,"Numero de elementos ordenados: %d\n", len);
 
     fprintf(arq, "%s", sort);
-    fprintf(arq,"Tempo: %.2f\n", time);
+    fprintf(arq,"Tempo: %f\n", time);
     fprintf(arq,"Comparações: %d\n", comparies);
     fprintf(arq,"Movimentações: %d\n\n", moves);
 

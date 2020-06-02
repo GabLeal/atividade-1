@@ -1,0 +1,30 @@
+Numero de elementos ordenados: 10000
+Metodo Bubble Sort
+Tempo: 128.671389
+Comparações: 99980001
+Movimentações: 49995000
+
+Numero de elementos ordenados: 10000
+Metodo Insertion Sort
+Tempo: 80.438611
+Comparações: 49995000
+Movimentações: 49995000
+
+Numero de elementos ordenados: 10000
+Metodo Selection Sort
+Tempo: 38.778056
+Comparações: 49995000
+Movimentações: 5000
+
+Numero de elementos ordenados: 10000
+Metodo Merge Sort
+Tempo: 0.387778
+Comparações: 64613
+Movimentações: 133631
+
+Numero de elementos ordenados: 10000
+Metodo Quick Sort
+Tempo: 30.924444
+Comparações: 49975034
+Movimentações: 5003
+

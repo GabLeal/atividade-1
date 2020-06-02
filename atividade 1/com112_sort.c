@@ -16,7 +16,6 @@ void bubbleSort(int *vector, int len, int *moves, int *comparies){
     for (x = 0; x < position_compare; x++){
         for (y = 0; y < position_compare; y++){
             *comparies += 1;
-
             if (vector[y] > vector[y+1]){
                 aux = vector[y];
                 vector[y] = vector[y+1];
@@ -29,34 +28,28 @@ void bubbleSort(int *vector, int len, int *moves, int *comparies){
 
 }
 
-/*
-* Selection Sort
-*/
+
 void selectionSort(int *vector, int len, int *moves, int *comparies){
-
-    int position_compare = len-1;
-    int aux = 0;
-    int i;
-    int j;
-
-    for(i = 0; i < len-1; i++){       
-      int position_bigger = 0;
-       
-       for(j = 0; j < position_compare; j++){
-            *comparies +=1;
-            if (vector[position_bigger] < vector[j+1]){
-                position_bigger = j+1;
-                *moves +=1;
-            }
-            aux = vector[position_bigger];
-       }
-
-       vector[position_bigger] = vector[position_compare];
-       vector[position_compare] = aux;
-
-       position_compare--;
-    }
-
+	int a, b, c;
+	int exchange, t;
+	for (a = 0; a < len-1; ++a) {
+		exchange = 0;
+		c = a;
+		t = vector[a];
+		for (b = a+1; b < len; ++b) {
+			*comparies += 1;
+			if (vector[b] < t) {
+				c = b;
+				t = vector[b];
+				exchange = 1;
+			} 
+		}
+		if (exchange) {
+			vector[c] = vector[a];
+			vector[a] = t;
+			*moves += 1;
+		} 
+	} 
 }
 
 /*
@@ -179,8 +172,11 @@ int partition(int *v, int begin, int end, int *moves, int *comparies){
         }
     }
 
-    v[begin] = v[right];
-    v[right] = pivo;
+    if(begin != right){
+        *moves += 1;
+        v[begin] = v[right];
+        v[right] = pivo;
+    }
 
     return right;
 }
